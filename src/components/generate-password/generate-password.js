@@ -1,6 +1,10 @@
 import styles from "./generate-password.module.css";
 
-export const GeneratePassword = ({ setPassword, password }) => {
+export const GeneratePassword = ({
+  setFirstPassword,
+  setSecondPassword,
+  lengthCount,
+}) => {
   const characters = [
     "A",
     "B",
@@ -96,15 +100,15 @@ export const GeneratePassword = ({ setPassword, password }) => {
   ];
 
   const generatePass = () => {
-    const passLength = 10;
     const pass = characters.join("");
     let newPass = "";
 
-    for (let i = 0; i < passLength; i++) {
+    for (let i = 0; i < lengthCount; i++) {
       let randomNum = Math.floor(Math.random() * pass.length);
       newPass += pass.substring(randomNum, randomNum + 1);
     }
-    setPassword(newPass);
+    setFirstPassword(newPass);
+    setSecondPassword(newPass);
   };
 
   return (

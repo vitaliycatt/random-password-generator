@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import styles from "./app.module.css";
 import { GeneratePassword } from "./components/generate-password";
 import { Password } from "./components/password";
+import { ThemeToggler } from "./components/theme-toggler";
 
 export const App = () => {
-  const [password, setPassword] = useState("");
+  const [copy, setCopy] = useState("");
+  const [lengthCount, setLengthCount] = useState(8);
+  const [firstPassword, setFirstPassword] = useState("");
+  const [secondPassword, setSecondPassword] = useState("");
   const [theme, setTheme] = useState("dark");
+  const inputRef = useRef(null);
 
   const toggleTheme = () => {
     if (theme === "dark") {
@@ -13,28 +18,18 @@ export const App = () => {
     } else setTheme("dark");
   };
 
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
-
   return (
     <div className={`${styles.container} ${styles[theme]}`}>
       <div className={styles.wrapper}>
-        <span
-          className={
-            theme === "light"
-              ? `${styles.theme} ${styles.sun}`
-              : `${styles.theme} ${styles.moon}`
-          }
-          onClick={toggleTheme}
-        >
-          Switch theme!
-        </span>
+        <ThemeToggler
+          toggleTheme={toggleTheme}
+          theme={theme}
+          setTheme={setTheme}
+        />
         <h1 className={styles.title}>
           Generate a{" "}
           <span className={styles.highlightedTitle}>random password</span>
         </h1>
-
         <p
           className={
             theme === "light"
@@ -45,13 +40,37 @@ export const App = () => {
           Never use an insecure password again.
         </p>
 
-        <GeneratePassword password={password} setPassword={setPassword} />
+        <div className={styles.passSwitcherWrapper}>
+          <GeneratePassword
+            setFirstPassword={setFirstPassword}
+            setSecondPassword={setSecondPassword}
+            lengthCount={lengthCount}
+          />
+
+          <input
+            type="number"
+            value={lengthCount}
+            placeholder="Length count"
+            className={styles.lengthCount}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setLengthCount(e.target.value);
+            }}
+          />
+        </div>
 
         <hr className={styles.line} />
-
         <div className={styles.passwordArea}>
-          <Password password={password} />
-          <Password password={password} />
+          <Password
+            setCopy={setCopy}
+            inputRef={inputRef}
+            password={firstPassword}
+          />
+          <Password
+            setCopy={setCopy}
+            password={secondPassword}
+            inputRef={inputRef}
+          />
         </div>
       </div>
     </div>

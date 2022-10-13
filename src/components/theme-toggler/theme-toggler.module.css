@@ -1,0 +1,16 @@
+.theme {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  cursor: pointer;
+}
+
+.moon {
+  content: url(../../../public/moon.svg);
+  width: 30px;
+}
+
+.sun {
+  content: url(../../../public/sun.svg);
+  width: 30px;
+}

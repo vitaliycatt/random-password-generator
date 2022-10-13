@@ -8,13 +8,6 @@
   position: relative;
 }
 
-.theme {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-  cursor: pointer;
-}
-
 .title {
   margin-bottom: 10px;
 
@@ -35,6 +28,26 @@
   font-family: "Inter";
   font-size: 20px;
   color: #d5d4d8;
+}
+
+.passSwitcherWrapper {
+  margin-bottom: 35px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lengthCount {
+  width: 90px;
+  padding: 10px 0;
+  background-color: #273549;
+  color: #55f991;
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+  text-align: center;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .line {
@@ -62,14 +75,4 @@
 
 .paragraphLight {
   color: #6b7280;
-}
-
-.moon {
-  content: url(../public/moon.svg);
-  width: 30px;
-}
-
-.sun {
-  content: url(../public/sun.svg);
-  width: 30px;
 }
